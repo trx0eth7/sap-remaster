@@ -1,0 +1,22 @@
+version: '3.8'
+
+services:
+  my_database:
+    container_name: my_database
+    image: postgres:12.6
+    environment:
+      POSTGRES_USER: root
+      POSTGRES_PASSWORD: toor
+      POSTGRES_DB: sap
+    ports:
+      - 5432:5432
+
+  mongo_sap:
+    container_name: mongo_sap
+    image: mongo
+    environment:
+      - MONGO_INITDB_DATABASE=sap
+      - MONGO_INITDB_ROOT_USERNAME=root
+      - MONGO_INITDB_ROOT_PASSWORD=toor
+    ports:
+      - 27017:27017

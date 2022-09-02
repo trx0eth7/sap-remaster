@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                      http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.5.xsd"
+        objectQuotingStrategy="QUOTE_ONLY_RESERVED_WORDS">
+    <changeSet id="1" author="sap">
+        <createTable tableName="SAP_EXAM_SHEET">
+            <column name="ID" type="UUID">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="PK_SAP_EXAM_SHEET"/>
+            </column>
+            <column name="NUMBER_" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet id="2" author="sap">
+        <createTable tableName="SAP_EXAM_SHEET_STUDENT_LINK">
+            <column name="EXAM_SHEET_ID" type="UUID">
+                <constraints nullable="false" primaryKey="true"
+                             primaryKeyName="PK_SAP_EXAM_SHEET_STUDENT_LINK"/>
+            </column>
+            <column name="STUDENT_ID" type="UUID">
+                <constraints nullable="false" primaryKey="true"
+                             primaryKeyName="PK_SAP_EXAM_SHEET_STUDENT_LINK"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet id="3" author="sap">
+        <addForeignKeyConstraint baseColumnNames="EXAM_SHEET_ID"
+                                 baseTableName="SAP_EXAM_SHEET_STUDENT_LINK"
+                                 constraintName="FK_SAPEXASHESTU_ON_EXAM_SHEET"
+                                 referencedColumnNames="ID" referencedTableName="SAP_EXAM_SHEET"/>
+    </changeSet>
+    <changeSet id="4" author="sap">
+        <addForeignKeyConstraint baseColumnNames="STUDENT_ID"
+                                 baseTableName="SAP_EXAM_SHEET_STUDENT_LINK"
+                                 constraintName="FK_SAPEXASHESTU_ON_STUDENT"
+                                 referencedColumnNames="ID" referencedTableName="SAP_STUDENT"/>
+    </changeSet>
+</databaseChangeLog>
